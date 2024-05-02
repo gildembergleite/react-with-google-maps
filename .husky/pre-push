@@ -1,0 +1,14 @@
+#!/usr/bin/env sh
+
+print_message() {
+  echo "--------------------------------------------------"
+  echo "| $1"
+  echo "--------------------------------------------------"
+}
+
+# Mensagem para o script 'build'
+print_message "Iniciando build..."
+npm run build
+
+# Mensagem de conclusão
+print_message "Concluído!"

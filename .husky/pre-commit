@@ -1,0 +1,19 @@
+#!/usr/bin/env sh
+
+# Função para imprimir mensagens formatadas
+print_message() {
+  echo "--------------------------------------------------"
+  echo "| $1"
+  echo "--------------------------------------------------"
+}
+
+# Mensagem para o script 'lint'
+print_message "Iniciando linting..."
+npm run lint
+
+# Mensagem para o script 'tsc'
+print_message "Verificando TypeScript types..."
+npx tsc --noEmit
+
+# Mensagem de conclusão
+print_message "Concluído!"
