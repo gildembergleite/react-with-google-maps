@@ -1,4 +1,5 @@
 import { cn } from '@/lib/utils'
+import { RootProvider } from '@/providers/root'
 import type { Metadata } from 'next'
 import { Inter as FontSans } from 'next/font/google'
 import { ReactNode } from 'react'
@@ -10,8 +11,7 @@ const fontSans = FontSans({
 })
 
 export const metadata: Metadata = {
-  title: 'Boilerplate NextJS',
-  description: 'With shadcn/ui and husky configured',
+  title: 'React with Google Maps',
 }
 
 interface RootLayoutProps {
@@ -27,7 +27,7 @@ export default function RootLayout({ children }: Readonly<RootLayoutProps>) {
           fontSans.variable,
         )}
       >
-        {children}
+        <RootProvider>{children}</RootProvider>
       </body>
     </html>
   )
