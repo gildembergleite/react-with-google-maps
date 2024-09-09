@@ -2,10 +2,10 @@ import { createContext, ReactNode, useState } from 'react'
 
 import { Map } from '@/entities/map'
 import { contentString } from '@/mock/content-string'
-import { coordinates } from '@/mock/coordinates'
 
 interface MapContextType {
   onMapReady: (instance: Map) => void
+  setCoordinatesData: (coordinates: Array<{ lat: number; lng: number }>) => void
   addHeatmap: () => void
   removeHeatmap: () => void
   addMarkers: () => void
@@ -17,7 +17,16 @@ interface MapContextType {
 export const MapContext = createContext<MapContextType | undefined>(undefined)
 
 export function MapProvider({ children }: { children: ReactNode }) {
+  const [coordinates, setCoordinates] = useState<
+    Array<{ lat: number; lng: number }>
+  >([])
   const [entityMap, setEntityMap] = useState<Map | null>(null)
+
+  function setCoordinatesData(
+    coordinates: Array<{ lat: number; lng: number }>,
+  ) {
+    setCoordinates(coordinates)
+  }
 
   function addPolyline() {
     if (entityMap) {
@@ -44,11 +53,9 @@ export function MapProvider({ children }: { children: ReactNode }) {
   function addMarkers() {
     if (entityMap) {
       removeMarkers()
-
-      const lastCoordIndex = coordinates.length - 1
       const lastCoord = new google.maps.LatLng(
-        coordinates[lastCoordIndex].lat,
-        coordinates[lastCoordIndex].lng,
+        coordinates[0].lat,
+        coordinates[0].lng,
       )
 
       const infoWindow = new google.maps.InfoWindow({
@@ -91,6 +98,7 @@ export function MapProvider({ children }: { children: ReactNode }) {
 
   const value = {
     onMapReady,
+    setCoordinatesData,
     addHeatmap,
     removeHeatmap,
     addPolyline,
