@@ -1,10 +1,16 @@
+/* eslint-disable camelcase */
 import { AsideBar } from '@/components/aside-bar'
 import { Map } from '@/components/map'
 
-export default async function HomePage() {
+export default async function HomePage({
+  searchParams: { page_size },
+}: {
+  searchParams: Record<string, string>
+}) {
   const url =
     process.env.NEXT_PUBLIC_API_BASE_URL +
-    '/rastreamento/coordinates?page_size=200'
+    '/rastreamento/coordinates?page_size=' +
+    (page_size ?? 100)
   const response = await fetch(url, {
     cache: 'no-cache',
   })
