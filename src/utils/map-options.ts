@@ -2,8 +2,8 @@ import { mapStyle } from './map-style'
 
 export const mapOptions: google.maps.MapOptions = {
   center: {
-    lat: -3.785102,
-    lng: -38.515231,
+    lat: -3.812954,
+    lng: -38.527563,
   },
   zoom: 13,
   mapTypeId: 'roadmap',
